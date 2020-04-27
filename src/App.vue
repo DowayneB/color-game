@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input v-model="chosen" type="color">
+    <hr>
+    <div class="column" v-bind:key="n" v-for="n in 20">
+      <div class="demo" style="background-color: white" @dblclick="makeWhite" @mouseup="divClasses" v-bind:key="n" v-for="n in 20"><span hidden>{{ n }}</span></div>
+    </div>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data: function() {
+    return {
+      'chosen': 'black'
+
+    }
+  },
+  methods: {
+    divClasses: function (event) {
+      event.target.style.backgroundColor = this.chosen;
+    },
+    makeWhite: function (event) {
+      event.target.style.backgroundColor = 'white';
+    }
+  },
+  watch: {
+
+  },
+  computed: {
+
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .column{
+    float: left;
+  }
+  .demo {
+    width: 15px;
+    height: 15px;
+    border: .5px solid black;
+  }
 </style>
